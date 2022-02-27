@@ -1,14 +1,14 @@
 pipeline {
   agent any
   environment {
-      IMAGEPATH = "yanivno/world-of-games:${BUILD_NUMBER}"
+      IMAGEPATH = "oamitay/world-of-games:${BUILD_NUMBER}"
   }
   stages {
     stage('Checkout') {
       steps {
         echo 'Cloning git repo..'
         sh 'printenv | sort'
-        git 'https://github.com/yanivno/WorldOfGames'
+        git 'https://github.com/oamitay/WorldOfGames'
       }
     }
     stage('Build') {
@@ -21,7 +21,7 @@ pipeline {
       steps {
           echo 'Running the container image...'
           echo 'Making a dummy score file'
-          sh 'echo \'{ "yaniv" : 80}\' > dummy_scores.txt'
+          sh 'echo \'{ "omer" : 80}\' > dummy_scores.txt'
           sh 'docker-compose down && docker-compose up -d'
           sh 'docker-compose cp dummy_scores.txt score-server:scores.txt'
       }
